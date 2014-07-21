@@ -6,10 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		03F72AD1197D0F98000B0DBA /* docsis_filter_us_int.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = docsis_filter_us_int.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		03F72AC6197D0F40000B0DBA = {
 			isa = PBXGroup;
 			children = (
+				03F72AD1197D0F98000B0DBA /* docsis_filter_us_int.py */,
 			);
 			sourceTree = "<group>";
 		};
