@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-    Version:	0.1
-    Author:		JM, 18.07.14
+    Name:       docsis_filter_us_in.py
+    Version:    0.1
+    Author:     JM, 18.07.14
     
     Zabbix per default can only accept one oid when performing a low level
     discovery. Then results can be filtered using a regex. However this is not
@@ -36,7 +37,6 @@ def filter_table(snmp_table):
         if row[2] == filter_on_ifType and row[3] == filter_on_ifAdminState:
             filtered_table.append(row)
 
-    # debug
 #    for row in filtered_table:
 #        print (row )
 
@@ -114,7 +114,6 @@ def run():
             for varBindTableRow in varBindTable:
                 for oid, val in varBindTableRow:
 
-                    #debug
 #                    print("%s = %s" % (oid.prettyPrint(), val.prettyPrint()))
 #                    print("%s = %s" % (oid, val))
 
