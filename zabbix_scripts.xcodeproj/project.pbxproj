@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		036D1D7819B06E8100A110D3 /* asw_screen_creation */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = asw_screen_creation; sourceTree = "<group>"; };
 		03D5BBAE1982764A002EE349 /* docsis_filter_cable_int.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = docsis_filter_cable_int.py; sourceTree = "<group>"; };
 		03D5BBAF1982A3B0002EE349 /* docsis_filter_us_no_vod.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = docsis_filter_us_no_vod.py; sourceTree = "<group>"; };
 		03F72AD1197D0F98000B0DBA /* docsis_filter_us_int.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = docsis_filter_us_int.py; sourceTree = "<group>"; };
@@ -16,6 +17,7 @@
 		03F72AC6197D0F40000B0DBA = {
 			isa = PBXGroup;
 			children = (
+				036D1D7819B06E8100A110D3 /* asw_screen_creation */,
 				03D5BBAE1982764A002EE349 /* docsis_filter_cable_int.py */,
 				03F72AD1197D0F98000B0DBA /* docsis_filter_us_int.py */,
 				03D5BBAF1982A3B0002EE349 /* docsis_filter_us_no_vod.py */,

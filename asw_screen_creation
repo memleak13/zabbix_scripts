@@ -1,0 +1,112 @@
+#!/usr/bin/python3
+"""
+    Name:       asw_screen_creation.py
+    Version:    poc - short and fast
+    Author:     JM, 29.08.14
+    
+    This script creates the Zabbix screen for 4500 asw devices. At this point it
+    only creates the screen_items not the screen itself. This output must be 
+    manually entered into the xml file under under <screen_items>.
+    
+    Every "create_and_print_screen_item" method call, creates one column
+    
+    It does not seem to be a good idea to add 500 graphs to one screen ;)
+    Need to play arround with the maximum amount of graphs: 80 seems to be a
+    good start
+    
+    c4507 have 80 ports per card
+    
+"""
+class ScreenItem(object):
+    """ Represents a screen item
+        
+        This class contains all xml attributes of <screen_item> and a print 
+        method which prints this object in xml.
+    """
+    def __init__(self):
+        self.resourcetype = 0
+        self.width = 500
+        self.height = 100
+        self.x = 1              #column
+        self.y = 0              #row
+        self.colspan = 1
+        self.rowspan = 1
+        self.elements = 0
+        self.valign = 0
+        self.halign = 0
+        self.style = 0
+        #self.url = ''
+        self.dynamic = 1
+        self.sort_triggers = 0
+        self.graph = ""         #graph_title
+        self.module_index = "0" #card of interface (gi<card>/<port>)
+        self.port_index = "0"   #port of card
+
+    def print(self):
+        print ("<screen_item>")
+        print ("    <resourcetype>{0}</resourcetype>".format(self.resourcetype))
+        print ("    <width>{0}</width>".format(self.width))
+        print ("    <height>{0}</height>".format(self.height))
+        print ("    <x>{0}</x>".format(self.x))
+        print ("    <y>{0}</y>".format(self.y))
+        print ("    <colspan>{0}</colspan>".format(self.colspan))
+        print ("    <rowspan>{0}</rowspan>".format(self.rowspan))
+        print ("    <elements>{0}</elements>".format(self.elements))
+        print ("    <valign>{0}</valign>".format(self.valign))
+        print ("    <halign>{0}</halign>".format(self.halign))
+        print ("    <style>{0}</style>".format(self.style))
+        print ("    <url/>")
+        print ("    <dynamic>{0}</dynamic>".format(self.dynamic))
+        print ("    <sort_triggers>{0}</sort_triggers>".format(
+                                                            self.sort_triggers))
+        print ("    <resource>")
+        print ("        <name>{0}{1}/{2}</name>".format(self.graph,
+                                                        self.module_index,
+                                                        self.port_index))
+        print ("        <host>asw17shr</host>")
+        print ("    </resource>")
+        print ("    <application/>")
+        print ("</screen_item>")
+
+#x defines which column to populate.
+def create_and_print_screen_item (card_per_chassis, port_per_card, x, graph):
+    """ creates xml ouput of all interfaces 
+        
+        it does this by creating column by column, increasing the row number
+        each loop. It creates only on category of graph each call.
+        
+        x:      defines the column number
+        graph:  defines the graph category (traffic, discards, error)
+        i:      set manually if only want output for one specific card
+    """
+    screen_item = ScreenItem()
+    screen_item.graph = graph
+    screen_item.x = x           #setting screen column
+    row = 0                     #row needs to be reset for each new column
+    #column loop
+    for i in range(1, card_per_chassis + 1):
+        #set manually if you for example only want card 2 (2 instead of i)
+        screen_item.module_index = 2
+        #row loop
+        for j in range(1, port_per_card + 1):
+            screen_item.port_index = j
+            screen_item.y = row #setting screen row
+            screen_item.print()
+            row += 1
+
+def run():
+    """ sets graph category and chasis paremeters """
+    #card_per_chassis and port_per_card define the interface (ex. gi2/24)
+    card_per_chassis = 1
+    port_per_card = 80
+    graph = "Traffic Statistics on interface GigabitEthernet"
+    create_and_print_screen_item(card_per_chassis, port_per_card, 0, graph)
+    graph = "Discard Statistics on interface GigabitEthernet"
+    create_and_print_screen_item(card_per_chassis, port_per_card, 1, graph)
+    """
+    graph = "Error Statistics on interface GigabitEthernet"
+    create_and_print_screen_item(card_per_chassis, port_per_card, 2, graph)
+    """
+
+if __name__ == "__main__":
+    run()
