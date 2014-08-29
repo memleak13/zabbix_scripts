@@ -10,7 +10,8 @@
     
     Every "create_and_print_screen_item" method call, creates one column
     
-    It does not seem to be a good idea to add 500 graphs to one screen ;)
+    It does not seem to be a good idea to add 500 graphs to one screen 
+    regarding performance.
     Need to play arround with the maximum amount of graphs: 80 seems to be a
     good start
     
@@ -68,7 +69,6 @@ class ScreenItem(object):
         print ("    <application/>")
         print ("</screen_item>")
 
-#x defines which column to populate.
 def create_and_print_screen_item (card_per_chassis, port_per_card, x, graph):
     """ creates xml ouput of all interfaces 
         
